@@ -12,7 +12,7 @@ const HomePage = () => {
 
   // Establish WebSocket connection
   useEffect(() => {
-    const socket = io('https://hash-zeeno-backend-tayd.vercel.app/');  // Ensure the port matches your backend
+    const socket = io('http://localhost:3000');  // Ensure the port matches your backend
 
     // Listen for SOS alerts
     socket.on('sosAlert', (data) => {
