@@ -12,7 +12,7 @@ const HomePage = () => {
 
   // Establish WebSocket connection
   useEffect(() => {
-    const socket = io('https://hash-zeeno-backend-tayd.vercel.app');  // Ensure the port matches your backend
+    const socket = io('https://hash-zeeno-backend-tayd.vercel.app/');  // Ensure the port matches your backend
 
     // Listen for SOS alerts
     socket.on('sosAlert', (data) => {
@@ -27,7 +27,7 @@ const HomePage = () => {
   // Fetch users from the server
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('https://hash-zeeno-backend-tayd.vercel.app/getAllUsers');
+      const response = await axios.get('https://hash-zeeno-backend-tayd.vercel.app/getAllUsers/');
       setUsers(response.data);
       console.log(response.data);  // Corrected: Log the response data directly
     } catch (err) {
