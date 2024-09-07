@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { GoogleMap, useJsApiLoader, DirectionsService, DirectionsRenderer } from "@react-google-maps/api";
 import axios from "axios";
+import io from 'socket.io-client';
 
 const HomePage = () => {
   const [users, setUsers] = useState([]);
@@ -9,10 +10,24 @@ const HomePage = () => {
   const [currentLocation, setCurrentLocation] = useState(null);
   const [directionsResponse, setDirectionsResponse] = useState(null);
 
+  // Establish WebSocket connection
+  useEffect(() => {
+    const socket = io('https://hash-zeeno-backend-tayd.vercel.app');  // Ensure the port matches your backend
+
+    // Listen for SOS alerts
+    socket.on('sosAlert', (data) => {
+      alert(`SOS Alert!\nName: ${data.name}\nEmail: ${data.email}\nMobile: ${data.mobileNumber}\nMessage: ${data.message}\nLocation: ${data.location}`);
+    });
+
+    return () => {
+      socket.disconnect();  // Clean up the connection on component unmount
+    };
+  }, []);
+
   // Fetch users from the server
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/getAllUsers');
+      const response = await axios.get('https://hash-zeeno-backend-tayd.vercel.app/getAllUsers');
       setUsers(response.data);
       console.log(response.data);  // Corrected: Log the response data directly
     } catch (err) {
