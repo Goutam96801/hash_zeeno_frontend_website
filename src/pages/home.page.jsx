@@ -27,7 +27,7 @@ const HomePage = () => {
   // Fetch users from the server
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('https://hash-zeeno-backend.vercel.app//getAllUsers/');
+      const response = await axios.get('https://hash-zeeno-backend.vercel.app/getAllUsers/');
       setUsers(response.data);
       console.log(response.data);  // Corrected: Log the response data directly
     } catch (err) {
