@@ -12,10 +12,10 @@ const HomePage = () => {
 
   // Establish WebSocket connection
   useEffect(() => {
-    const socket = io('https://hash-zeeno-backend.vercel.app', {
-      transports: ['websocket', 'polling'], // Explicitly allow both
-      withCredentials: true, // Allow credentials
-    });    
+    const socket = io(['https://hash-zeeno-backend.vercel.app', 'http://localhost:5000'], {
+      transports: ['polling'], // Only use HTTP polling
+      withCredentials: true,
+    });
     // Listen for SOS alerts
     socket.on('sosAlert', (data) => {
       alert(`SOS Alert!\nName: ${data.name}\nEmail: ${data.email}\nMobile: ${data.mobileNumber}\nMessage: ${data.message}\nLocation: ${data.location}`);
